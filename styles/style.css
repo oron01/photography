@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
 font-family: "Montserrat", sans-serif;
@@ -8,6 +9,10 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
+    display: flex;
+    justify-content: center;
+        background: rgb(10, 10, 10);
+
 
 }
 
@@ -15,6 +20,8 @@ body {
     position: relative;
     height: 100%;
     width: 100%;
+    max-width: 1190px;
+
 }
 
 .menuContainer {
@@ -45,16 +52,32 @@ ul > li {
     margin: 10px;
 }
 
+ul > li { 
+background: rgba(10,10,10,0.75);
+border: 1px solid rgba(255,255,255,0.1);
+backdrop-filter: blur(10px);
+border-radius: 6px;
+box-shadow: none;
+color: #f4f4f4;
+font-weight: 500;
+
+}
+
+b {
+    text-align: center;
+}
+
 ul > li {
-  background-color: rgba(255, 255, 255, 0.0272);
+  /* background-color: rgba(255, 255, 255, 0.0272);
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.836);
   backdrop-filter: blur(3px);
-  border-radius: 10px;
+  border-radius: 10px; */
 
 }
 
 li:hover {
-    background-color: rgba(255, 217, 0, 0.575);
+    /* background-color: rgba(255, 217, 0, 0.575); */
+    background: rgba(255,255,255,0.1);
     cursor: grab;
     transition: background-color 0.5s ease-in-out;
 }
@@ -63,7 +86,7 @@ li:hover {
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-rows: 5fr 0.25fr 5fr ;
+    grid-template-rows: 7fr 0.25fr 4.5fr ;
 }
 
 .divider {
@@ -107,4 +130,11 @@ li:hover {
   inset: 0;
   background-color: rgba(255, 255, 255, 0.25);
   transition: background-color 0.5s;
+}
+
+@media (min-width:500px) {
+    .typesSection > div {
+        background-position-y: 15% !important;
+        background-color: green;
+    }
 }
