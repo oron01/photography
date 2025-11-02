@@ -23,9 +23,29 @@ let currentPage = "home"
 //     a.classList.add(currentPage)
 // }
 
+let movePage = async () => {
+    let getHTML = async (fileName) => {
+        try {
+            const res = await fetch(`${fileName}.html`)
+            if (!res.ok) throw new Error('failed to fetch html')
+            const html = await res.text()
+        return html
+        }
+        catch (err) {console.log(err)}
+    }
+    let setHTML = (newHTML) => {
+        let mainContainer = document.querySelector('.mainContainer')
+        mainContainer.innerHTML = newHTML
+    }
+    let newHTML = await getHTML("book")
+    setHTML(newHTML)
+}
+
+
 let navClickHandler = (e) => {
     let text = e.target.textContent
     let validText = ['Home','Portfolio','About','Services',"Book"]
+    let setPageHighlighting = () => {
     if (validText.includes(text)) {
         navButs.forEach((but) => {
             if (but.classList.contains("currentPage")) {but.classList.remove("currentPage")}
@@ -33,7 +53,10 @@ let navClickHandler = (e) => {
         let a = document.querySelector(`[data-pageBut='${text}']`)
         a.classList.add('currentPage')
 
-    }
+    }}
+    setPageHighlighting()
+    movePage()
+
 }
 
 let navButs = document.querySelectorAll('li')
