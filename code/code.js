@@ -1,3 +1,5 @@
+let setMainPage = () => {
+
 let meSection = document.querySelector(".meSection")
 meSection.style.backgroundImage = "url('images/me.jpg')"
 meSection.style.backgroundSize = 'cover'
@@ -18,17 +20,31 @@ imageSetting(corporateView,"pro")
 imageSetting(eventView,"events")
 
 let currentPage = "home"
+
+let ctaBut = document.querySelector('.cta')
+ctaBut.addEventListener("click", () => {movePage("services")
+    setPageHighlighting("Services")
+})
+
+}
+setMainPage()
 // if (currentPage = "home") {
 //     let a = document.querySelector("[data-pageBut='home']")
 //     a.classList.add(currentPage)
 // }
 
-let movePage = async () => {
+let movePage = async (pageName) => {
     let getHTML = async (fileName) => {
         try {
             const res = await fetch(`${fileName}.html`)
             if (!res.ok) throw new Error('failed to fetch html')
-            const html = await res.text()
+            let html = await res.text()
+        if (fileName == "index") {
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(html,'text/html')
+            desiredIndexSegment = doc.querySelector('.mainContainer')
+            html = desiredIndexSegment.innerHTML
+        }
         return html
         }
         catch (err) {console.log(err)}
@@ -37,25 +53,38 @@ let movePage = async () => {
         let mainContainer = document.querySelector('.mainContainer')
         mainContainer.innerHTML = newHTML
     }
-    let newHTML = await getHTML("book")
+    let getCode = async (pageName) => {
+        if (pageName !== "index")
+        try {
+            const res = await fetch(`code/${pageName}.js`)
+            if (!res.ok) throw new Error('no code')
+                let code = res.text()
+            return code
+        } catch (err) {console.warn(err)}
+    }
+    let newHTML = await getHTML(pageName)
     setHTML(newHTML)
+    eval(await getCode(pageName))
 }
 
-
-let navClickHandler = (e) => {
-    let text = e.target.textContent
-    let validText = ['Home','Portfolio','About','Services',"Book"]
-    let setPageHighlighting = () => {
-    if (validText.includes(text)) {
+    let setPageHighlighting = (page) => {
+        let navButs = document.querySelectorAll("li")
         navButs.forEach((but) => {
             if (but.classList.contains("currentPage")) {but.classList.remove("currentPage")}
         })
-        let a = document.querySelector(`[data-pageBut='${text}']`)
+        let a = document.querySelector(`[data-pageBut='${page}']`)
         a.classList.add('currentPage')
+}
 
-    }}
-    setPageHighlighting()
-    movePage()
+let navClickHandler = async (e) => {
+    let text = e.target.textContent
+    let validText = ['Home','Portfolio','About','Services',"Contact"]
+    if (validText.includes(text)) {
+        setPageHighlighting(text)
+    }
+    if (text == 'Home') text = "index"
+    await movePage(text.toLowerCase())
+    if (text == 'index') setMainPage()
 
 }
 

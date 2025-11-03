@@ -1,0 +1,41 @@
+.mainContainer {
+    display: flex;
+}
+
+.innerPageContainer {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 3em;
+}
+
+.socialContainer {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    font-family: "Montserrat", sans-serif;
+    border: 3px solid white;
+    border-radius: 25px;
+    padding: 0px 1em;
+}
+
+.socialContainer:hover{ 
+    background: rgba(255,255,255,0.1);
+    cursor: grab;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.socialContainer > img {
+    height: 2em;
+    width: 2em;
+
+}
+
+.invert {
+    filter: invert(0);
+}
