@@ -1,3 +1,6 @@
+if (window.location.href == "http://photo.oron.club/") {window.location.href = "https://photo.oron.club/"}
+
+
 let setMainPage = () => {
 
 let meSection = document.querySelector(".meSection")

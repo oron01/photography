@@ -22,6 +22,7 @@
     border: 3px solid white;
     border-radius: 25px;
     padding: 0px 1em;
+    font-weight: 100;
 }
 
 .socialContainer:hover{ 
@@ -34,6 +35,10 @@
     height: 2em;
     width: 2em;
 
+}
+
+.socialContainer > h1 {
+    font-weight: 600;
 }
 
 .invert {
