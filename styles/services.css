@@ -97,7 +97,7 @@ div {
 }
 
 .package > h2 {
-    font-size: clamp(16px, 2em, 2vw);
+    font-size: clamp(16px, 2em, 1vw);
 }
 
 .package > p {
